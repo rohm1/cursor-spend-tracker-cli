@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "spend": "tsx cli.ts",
+    "notify-spend": "./notify-spend.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.19.2"
+  }
+}
