@@ -26,5 +26,9 @@ fi
 # Escape for AppleScript: \ -> \\, " -> \", newlines -> \n (so notification shows line breaks)
 BODY=$(printf '%s' "$OUTPUT" | sed 's/\\/\\\\/g; s/"/\\"/g' | awk '{if(NR>1) printf "\\n"; printf "%s", $0}')
 
-# macOS notification
-osascript -e "display notification \"$BODY\" with title \"$TITLE\""
+# macOS notification: prefer terminal-notifier if available, else osascript
+if command -v terminal-notifier >/dev/null 2>&1; then
+    terminal-notifier -title "$TITLE" -message "$OUTPUT" -open "https://cursor.com/dashboard/usage"
+else
+    osascript -e "display notification \"$BODY\" with title \"$TITLE\""
+fi
